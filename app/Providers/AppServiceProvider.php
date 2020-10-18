@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Service\Product\ProductRepository;
+use App\Service\Product\ProductRepositoryInterface;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +26,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->app->bind(
+            ProductRepositoryInterface::class,
+            ProductRepository::class
+        );
+
+        $this->app->bind(
+            ResponseFactory::class,
+            \Illuminate\Routing\ResponseFactory::class
+        );
     }
 }
